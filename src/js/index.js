@@ -2,6 +2,7 @@ import Search from './models/Search';
 import Recipe from './models/Recipe';
 import * as searchView from './views/searchView';
 import { elements, renderLoader, clearLoader } from './views/base';
+//  import { stat } from 'fs';
 
 /** Global state of the app 
  * Search Object
@@ -61,7 +62,7 @@ elements.searchResPages.addEventListener('click', e => {
  * Recipe Controller
  */
 
- const controlRecipe = () => {
+ const controlRecipe = async () => {
     // get ID from url    
     const id = window.location.hash.replace('#', '');
     console.log(id);
@@ -73,8 +74,9 @@ elements.searchResPages.addEventListener('click', e => {
         state.recipe = new Recipe(id);
 
         try {
-        // Get Recipe data
+        // Get Recipe data and parse ingredients
         await state.recipe.getRecipe();
+        state.recipe.parseIngredients();
         // Calculate time and servings
         state.recipe.calcTime();
         state.recipe.calcServings();
