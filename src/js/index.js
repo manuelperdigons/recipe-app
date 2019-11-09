@@ -72,6 +72,7 @@ elements.searchResPages.addEventListener('click', e => {
         // Prepare UI for changes
         recipeView.clearRecipe();
         renderLoader(elements.recipe);
+        if (state.search) searchView.highlightSelected(id);
         // Create new recipe object
         state.recipe = new Recipe(id);
 
@@ -94,5 +95,15 @@ elements.searchResPages.addEventListener('click', e => {
  };
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+
+// Handling Recipe Button Clicks
+
+elements.recipe.addEventListener('click', e => {
+    if (e.target.matches('.btn-decrease btn-decrease *')) {
+        // Decrease button was clicked
+    } else if (e.target.matches('.btn-increase btn-increase *')) {
+        // Increase button was clicked
+    }
+})
 
 
