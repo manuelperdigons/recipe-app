@@ -99,11 +99,15 @@ elements.searchResPages.addEventListener('click', e => {
 // Handling Recipe Button Clicks
 
 elements.recipe.addEventListener('click', e => {
-    if (e.target.matches('.btn-decrease btn-decrease *')) {
+    if (e.target.matches('.btn-decrease, .btn-decrease *')) {
         // Decrease button was clicked
-    } else if (e.target.matches('.btn-increase btn-increase *')) {
+        if (state.recipe.servings > 1)
+        state.recipe.updateServings('dec');
+        recipeView.updateServingsIngredients(state.recipe);
+    } else if (e.target.matches('.btn-increase, .btn-increase *')) {
         // Increase button was clicked
+        state.recipe.updateServings('inc');
+        recipeView.updateServingsIngredients(state.recipe);
     }
 })
-
 
